@@ -1,0 +1,105 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node {
+struct node *prev;
+int data;
+struct node *next;
+};
+struct node *head = NULL;
+void insert_end(int n) {
+struct node *new_node = (struct node *)malloc(sizeof(struct node)); new_node->data = n;
+new_node->next = NULL;
+if (head == NULL) {
+new_node->prev = NULL;
+head = new_node;
+} else {
+struct node *temp = head;
+while (temp->next != NULL) {
+temp = temp->next;
+}
+temp->next = new_node;
+new_node->prev = temp;
+}
+}
+void insert_begin(int n) {
+struct node *new_node = (struct node *)malloc(sizeof(struct node)); new_node->data = n;
+new_node->next = head;
+new_node->prev = NULL;
+if (head != NULL) {
+head->prev = new_node;
+}
+head = new_node;
+}
+void delete_end() {
+if (head == NULL) {
+printf("List is empty\n");
+} else if (head->next == NULL) {
+printf("Deleted element: %d\n", head->data); // Display deleted element free(head);
+head = NULL;
+} else {
+struct node *temp = head;
+while (temp->next != NULL) {
+temp = temp->next;
+}
+printf("Deleted element: %d\n", temp->data); // Display deleted element temp->prev->next = NULL;
+free(temp);
+}
+}
+void delete_begin() {
+if (head == NULL) {
+printf("List is empty\n");
+} else if (head->next == NULL) { // Only one node
+printf("Deleted element: %d\n", head->data); // Display deleted element free(head);
+head = NULL;
+} else {
+struct node *temp = head;
+printf("Deleted element: %d\n", temp->data); // Display deleted element head = head->next;
+head->prev = NULL;
+free(temp);
+}
+}
+void display() {
+struct node *temp = head;
+if (head == NULL) {
+printf("List is empty\n");
+} else {
+while (temp != NULL) {
+printf("%d -> ", temp->data);
+temp = temp->next;
+}
+printf("NULL\n");
+}
+}
+int main() {
+int choice, n;
+do {
+printf("What function to perform (1=insert_begin, 2=insert_end,  3=delete_begin, 4=delete_end, 5=display, 6=exit): ");
+scanf("%d", &choice);
+switch (choice) {
+case 1:
+printf("Enter the value to be inserted at the beginning: "); scanf("%d", &n);
+insert_begin(n);
+break;
+case 2:
+printf("Enter the value to be inserted at the end: "); scanf("%d", &n);
+insert_end(n);
+break;
+case 3:
+delete_begin();
+break;
+case 4:
+delete_end();
+break;
+case 5:
+display();
+break;
+case 6:
+printf("Exiting...\n");
+break;
+default:
+printf("Invalid choice\n");
+break;
+}
+} while (choice != 6);
+return 0;
+}
