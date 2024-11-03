@@ -1,0 +1,49 @@
+#include<stdio.h>
+int main(){
+int arra,arrb;
+printf("Enter size of first array:");
+scanf("%d",&arra);
+printf("Enter size of second array:");
+scanf("%d",&arrb);
+int arr[arra+arrb];
+int a[arra],b[arrb];
+printf("Enter %d elements for first array: ",arra);
+for(int l=0;l<arra;l++){
+scanf("%d",&a[l]);
+}
+printf("Enter %d elements for second array: ",arrb);
+for(int l=0;l<arrb;l++){
+scanf("%d",&b[l]);
+}
+int i=0,j=0;
+for(int k=0;k<arra+arrb;k++){
+if(i<arra&&j<arrb){
+if(a[i]<b[j]){
+arr[k]=a[i];
+i++;
+}else if(a[i]>b[j]){
+arr[k]=b[j];
+j++;
+}else if(a[i]==b[j]){
+arr[k]=a[i];
+i++;
+k++;
+arr[k]=b[j];
+j++;
+k++;
+}
+}else if(j==arrb){
+arr[k]=a[i];
+i++;
+}else if(i==arra){
+arr[k]=b[j];
+j++;
+}
+}
+printf("Merge Sorted List: ");
+for(int k=0;k<arra+arrb;k++){
+printf("%d ",arr[k]);
+}
+printf("\n");
+return 0;
+}
