@@ -1,47 +1,66 @@
-#include<stdio.h> 
-int Q[100],front=-1,rear=-1,x,i,n=5,choice; 
-void Display(); 
-void Insert(); 
-void Delete(); 
-void main(){ 
-printf("Welcome to Travelista !!, Book your tickets now \n");; 
-printf("You can avail waiting list facility\n"); 
-do { 
-printf("Enter 1.To Book Journey \t 2.To Cancel reservation\t 3.To Exit\n"); scanf("%d",&choice); 
-switch(choice){ 
-case 1:Insert(); 
-break; 
-case 2:Delete(); 
-break; 
-case 3:printf("Exited Succesfully\n"); 
-break; 
-} 
-} 
-while(choice!=3); 
+#include <stdio.h>
+
+int Q[100], front = -1, rear = -1, x, i, n = 5, choice;
+
+void Display();
+void Insert();
+void Delete();
+
+int main() { 
+    printf("Welcome to Travelista! Book your tickets now.\n"); 
+    printf("You can avail waiting list facility.\n"); 
+
+    do { 
+        printf("\nEnter your choice:\n1. To Book Journey\n2. To Cancel Reservation\n3. To Exit\n");
+        scanf("%d", &choice); 
+
+        switch (choice) { 
+            case 1:
+                Insert();
+                break;
+            case 2:
+                Delete();
+                break;
+            case 3:
+                printf("Exited Successfully\n");
+                break;
+            default:
+                printf("Invalid choice, please try again.\n");
+                break;
+        }
+    } while (choice != 3); 
+
+    return 0;
 }
 
-void Insert(){ 
-if(rear>=n-1) 
-printf("Sorry, No Reservation available"); 
-else{ 
-printf("Enter Table number of choice[1-5] "); 
-scanf("%d",&x); 
-rear++; 
-Q[rear]=x; 
-if(front==-1){ 
-front=0; 
-} 
-printf("Are you excited to travel %d spots ,Confirmed booking \n",x); } 
-} 
-void Delete(){ 
-if (front==-1) 
-{ 
-printf("No Reservations to Cancel\n"); 
-} 
-else{ 
-printf("The cancelled reservation is : %d\n",Q[front]); } 
-if(front==rear) 
-front=rear=-1; 
-else 
-front++; 
+void Insert() { 
+    if (rear >= n - 1) {
+        printf("Sorry, no reservations available\n");
+    } else { 
+        printf("Enter table number of choice [1-5]: ");
+        scanf("%d", &x);
+        rear++;
+        Q[rear] = x;
+
+        if (front == -1) {
+            front = 0;
+        }
+
+        printf("Are you excited to travel %d spots? Booking confirmed!\n", x);
+    } 
 }
+
+void Delete() { 
+    if (front == -1) {
+        printf("No reservations to cancel\n");
+    } else { 
+        printf("The cancelled reservation is: %d\n", Q[front]);
+
+        if (front == rear) {
+            front = rear = -1; // Reset queue when all elements are removed
+        } else {
+            front++;
+        }
+    }
+}
+
